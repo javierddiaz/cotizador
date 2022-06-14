@@ -4,6 +4,9 @@
 	Web: obedalvarado.pw
 	Mail: info@obedalvarado.pw
 	---------------------------*/
+
+use Dompdf\Dompdf;
+
 	session_start();
 	/* Connect To Database*/
 	include("../../config/db.php");
@@ -18,18 +21,20 @@
 	exit;
 	}
 
-	require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	//require_once(dirname(__FILE__).'/../html2pdf.class.php');
 		
 	//Variables por GET
-	$atencion=$_GET['atencion'];
+	$area=$_GET['area'];
 	$tel1=$_GET['tel1'];
-	$empresa=$_GET['empresa'];
+	$instructor=$_GET['instructor'];
 	$tel2=$_GET['tel2'];
 	$email=$_GET['email'];
 	$condiciones=$_GET['condiciones'];
 	$validez=$_GET['validez'];
 	$entrega=$_GET['entrega'];
+
 	//Fin de variables por GET
+	
 	$sql_cotizacion=mysqli_query($con, "select LAST_INSERT_ID(numero_cotizacion) as last from cotizaciones_demo order by id_cotizacion desc limit 0,1 ");
 	$rwC=mysqli_fetch_array($sql_cotizacion);
 	$numero_cotizacion=$rwC['last']+1;	
@@ -37,6 +42,24 @@
      ob_start();
      include(dirname('__FILE__').'/res/cotizacion_html.php');
     $content = ob_get_clean();
+	
+	require_once 'dompdf/autoload.inc.php';
+	$dompdf = new Dompdf();
+	$options=$dompdf->getOptions();
+	$options->set(array('isRemoteEnabled'=>true));
+	$dompdf->setOptions($options);
+
+	$dompdf->loadHtml('<html><body>'.$content.'</body></html>');
+	$dompdf->setPaper('letter');
+
+	$dompdf->render();
+	$dompdf->stream("solicitud.pdf",array("Attachment"=>false));
+	/*
+	header("Content-type: application/pdf");
+	header("Content-Disposition: inline; filename=documento.pdf");
+	echo $dompdf->output();*/
+
+/*!
 
     try
     {
@@ -53,3 +76,4 @@
         echo $e;
         exit;
     }
+*/

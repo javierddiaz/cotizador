@@ -18,26 +18,33 @@
 		 $sWhere = "";
 		if ( $_GET['q'] != "" )
 		{
-			$sWhere = "WHERE (";
+			$area=$_REQUEST['area'];
+			$sWhere = "WHERE id_departamento_producto='$area' and ( ";
 			for ( $i=0 ; $i<count($aColumns) ; $i++ )
 			{
 				$sWhere .= $aColumns[$i]." LIKE '%".$q."%' OR ";
 			}
 			$sWhere = substr_replace( $sWhere, "", -3 );
 			$sWhere .= ')';
+			
+		}
+		else{
+			$area=$_REQUEST['area'];
+			$sWhere = "WHERE id_departamento_producto='$area'";
 		}
 		include 'pagination.php'; //include pagination file
 		//pagination variables
 		$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
-		$per_page = 5; //how much records you want to show
+		$per_page = 10; //how much records you want to show
 		$adjacents  = 4; //gap between pages after number of adjacents
 		$offset = ($page - 1) * $per_page;
 		//Count the total number of row in your table*/
-		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+		
+		$count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere ");
 		$row= mysqli_fetch_array($count_query);
 		$numrows = $row['numrows'];
 		$total_pages = ceil($numrows/$per_page);
-		$reload = './index.php';
+		$reload = '../cotizacion.php';
 		//main query to fetch the data
 		$sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
 		$query = mysqli_query($con, $sql);
@@ -50,7 +57,6 @@
 				<tr  class="warning">
 					<th>Código</th>
 					<th>Producto</th>
-					<th>Marca</th>
 					<th><span class="pull-right">Cant.</span></th>
 					<th><span class="pull-right">Precio</span></th>
 					<th style="width: 36px;"></th>
@@ -62,22 +68,19 @@
 					$nombre_producto=$row['nombre_producto'];
 					$id_marca_producto=$row['id_marca_producto'];
 					$codigo_producto=$row["codigo_producto"];
-					$sql_marca=mysqli_query($con, "select nombre_marca from marcas_demo where id_marca='$id_marca_producto'");
-					$rw_marca=mysqli_fetch_array($sql_marca);
-					$nombre_marca=$rw_marca['nombre_marca'];
+					$area=$_REQUEST['area'];
 					$precio_venta=$row["precio_producto"];
-					$precio_venta=number_format($precio_venta,2);
+					//$precio_venta=number_format($precio_venta,2);
 					?>
 					<tr>
 						<td><? echo $codigo_producto; ?></td>
 						<td><? echo $nombre_producto; ?></td>
-						<td ><? echo $nombre_marca; ?></td>
 						<td class='col-xs-1'>
 						<div class="pull-right">
 						<input type="text" class="form-control" style="text-align:right" id="cantidad_<? echo $id_producto; ?>"  value="1" >
 						</div></td>
 						<td class='col-xs-2'><div class="pull-right">
-						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<? echo $id_producto; ?>"  value="<? echo $precio_venta;?>" >
+						<input type="text" class="form-control" style="text-align:right" id="precio_venta_<? echo $id_producto; ?>"  value="<? echo ($precio_venta);?>" >
 						</div></td>
 						<td ><span class="pull-right"><a href="#" onclick="agregar('<? echo $id_producto ?>')"><i class="glyphicon glyphicon-plus"></i></a></span></td>
 					</tr>
