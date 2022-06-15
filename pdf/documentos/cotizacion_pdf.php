@@ -46,16 +46,16 @@ use Dompdf\Dompdf;
 	$content = ob_get_clean();
 
 	require_once './dompdf/autoload.inc.php';
-
+	echo "bi3n 49";
+	/*
 	$dompdf = new Dompdf();
 	$options=$dompdf->getOptions();
 	$options->set(array('isRemoteEnabled'=>true));
 	$dompdf->setOptions($options);
-	echo "bi3n";
-	/*
+
 	$dompdf->loadHtml('<html><body>'.$content.'</body></html>');
 	$dompdf->setPaper('letter');
-	
+
 	$dompdf->render();
 	$dompdf->stream("solicitud.pdf",array("Attachment"=>false));
 */
