@@ -46,9 +46,10 @@ use Dompdf\Dompdf;
 	$content = ob_get_clean();
 
 	require_once './dompdf/autoload.inc.php';
-	echo "bi3n 49";
-	/*
+
 	$dompdf = new Dompdf();
+	echo "bi3n 51";
+	/*
 	$options=$dompdf->getOptions();
 	$options->set(array('isRemoteEnabled'=>true));
 	$dompdf->setOptions($options);
