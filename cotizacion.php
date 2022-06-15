@@ -203,7 +203,7 @@
 		  var validez = $("#validez").val();
 		  var entrega = $("#entrega").val();
 
-		 VentanaCentrada('./pdf/documentos/cotizacion_pdf.php?area='+area+'&tel1='+tel1+'&instructor='+instructor+'&tel2='+tel2+'&email='+email+'&condiciones='+condiciones+'&validez='+validez+'&entrega='+entrega,'Cotizacion','','1024','768','true');
+		 VentanaCentrada('./pdf/documentos/cotizacion_pdf.php?area='+area+'&instructor='+instructor+'&tel2='+tel2+'&email='+email+'&condiciones='+condiciones+'&validez='+validez+'&entrega='+entrega,'Cotizacion','','1024','768','true');
 	 	});
 	</script>
   </body>

@@ -25,7 +25,6 @@ use Dompdf\Dompdf;
 		
 	//Variables por GET
 	$area=$_GET['area'];
-	$tel1=$_GET['tel1'];
 	$instructor=$_GET['instructor'];
 	$tel2=$_GET['tel2'];
 	$email=$_GET['email'];
@@ -39,11 +38,12 @@ use Dompdf\Dompdf;
 	$rwC=mysqli_fetch_array($sql_cotizacion);
 	$numero_cotizacion=$rwC['last']+1;	
     // get the HTML
-     ob_start();
-     include(dirname('__FILE__').'/res/cotizacion_html.php');
+    ob_start();
+
+    require_once(dirname('__FILE__').'/res/cotizacion_html.php');
     $content = ob_get_clean();
-	
-	require_once 'dompdf/autoload.inc.php';
+
+	require_once './dompdf/autoload.inc.php';
 	$dompdf = new Dompdf();
 	$options=$dompdf->getOptions();
 	$options->set(array('isRemoteEnabled'=>true));
@@ -54,10 +54,8 @@ use Dompdf\Dompdf;
 
 	$dompdf->render();
 	$dompdf->stream("solicitud.pdf",array("Attachment"=>false));
-	/*
-	header("Content-type: application/pdf");
-	header("Content-Disposition: inline; filename=documento.pdf");
-	echo $dompdf->output();*/
+
+	
 
 /*!
 

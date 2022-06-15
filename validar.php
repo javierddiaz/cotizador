@@ -11,12 +11,14 @@
 	while ($row=mysqli_fetch_array($sql))
 	{
         session_start();
+        $session_id = session_id();
         $_SESSION["seguir"]="ok";
         $_SESSION["codigo"]=$row["termcondition"];
         $_SESSION["nombre"]=$row["token"];
         $_SESSION["instructor"]=$row["nombre"];
         $_SESSION["correo"]=$row["correo"];
         $_SESSION["telefono"]=$row["telefono"];
+        $delete=mysqli_query($con,"DELETE FROM tmp_cotizacion WHERE session_id='".$session_id."'");
         header('Location: cotizacion.php');
         exit;
     }
