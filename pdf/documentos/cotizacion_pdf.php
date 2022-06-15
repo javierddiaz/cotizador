@@ -21,7 +21,7 @@ use Dompdf\Dompdf;
 	exit;
 	}
 
-	//require_once(dirname(__FILE__).'/../html2pdf.class.php');
+	require_once(dirname(__FILE__).'/../html2pdf.class.php');
 		
 	//Variables por GET
 	$area=$_GET['area'];
@@ -71,7 +71,7 @@ use Dompdf\Dompdf;
         // display the full page
         $html2pdf->pdf->SetDisplayMode('fullpage');
         // convert
-        $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+        $html2pdf->writeHTML('<html><body>'.$content.'</body></html>', isset($_GET['vuehtml']));
         // send the PDF
         $html2pdf->Output('Cotizacion.pdf');
     }
