@@ -51,11 +51,11 @@ use Dompdf\Dompdf;
 	$options=$dompdf->getOptions();
 	$options->set(array('isRemoteEnabled'=>true));
 	$dompdf->setOptions($options);
-
-	$dompdf->loadHtml('<html><body>'.$content.'</body></html>');
-	$dompdf->setPaper('letter');
 	echo "bi3n";
 	/*
+	$dompdf->loadHtml('<html><body>'.$content.'</body></html>');
+	$dompdf->setPaper('letter');
+	
 	$dompdf->render();
 	$dompdf->stream("solicitud.pdf",array("Attachment"=>false));
 */
