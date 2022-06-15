@@ -46,6 +46,7 @@ use Dompdf\Dompdf;
 	$content = ob_get_clean();
 
 	require_once './dompdf/autoload.inc.php';
+	echo "bi3n";
 	/*
 	$dompdf = new Dompdf();
 	$options=$dompdf->getOptions();
