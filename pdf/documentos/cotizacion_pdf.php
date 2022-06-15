@@ -42,9 +42,9 @@ use Dompdf\Dompdf;
     ob_start();
 
     require_once(dirname('__FILE__').'/res/cotizacion_html.php');
-   	/*
-	$content = ob_get_clean();
 
+	$content = ob_get_clean();
+/*
 	require_once './dompdf/autoload.inc.php';
 	$dompdf = new Dompdf();
 	$options=$dompdf->getOptions();
