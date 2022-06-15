@@ -38,11 +38,12 @@ use Dompdf\Dompdf;
 	$rwC=mysqli_fetch_array($sql_cotizacion);
 	$numero_cotizacion=$rwC['last']+1;	
     // get the HTML
-	/*
+
     ob_start();
 
     require_once(dirname('__FILE__').'/res/cotizacion_html.php');
-    $content = ob_get_clean();
+   	/*
+	$content = ob_get_clean();
 
 	require_once './dompdf/autoload.inc.php';
 	$dompdf = new Dompdf();
