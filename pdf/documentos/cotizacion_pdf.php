@@ -44,12 +44,12 @@ use Dompdf\Dompdf;
     require_once(dirname('__FILE__').'/res/cotizacion_html.php');
 
 	$content = ob_get_clean();
-
+	echo "bi3n 51";
+	/*
 	require_once './dompdf/autoload.inc.php';
 
 	$dompdf = new Dompdf();
-	echo "bi3n 51";
-	/*
+
 	$options=$dompdf->getOptions();
 	$options->set(array('isRemoteEnabled'=>true));
 	$dompdf->setOptions($options);
@@ -62,7 +62,7 @@ use Dompdf\Dompdf;
 */
 	
 
-/*!
+
 
     try
     {
@@ -79,4 +79,3 @@ use Dompdf\Dompdf;
         echo $e;
         exit;
     }
-*/
